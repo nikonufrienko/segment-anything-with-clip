@@ -64,7 +64,7 @@ def get_score(crop: PIL.Image.Image, texts: List[str]) -> torch.Tensor:
 
 
 def crop_image(image: np.ndarray, mask: Dict[str, Any]) -> PIL.Image.Image:
-    x, y, w, h = mask["bbox"]
+    x, y, w, h = [int(i) for i in mask["bbox"]]
     masked = image * np.expand_dims(mask["segmentation"], -1)
     crop = masked[y : y + h, x : x + w]
     if h > w:
